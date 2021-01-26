@@ -1,5 +1,5 @@
 # RelevanceStacktrace.jl
-Julia relevance Stacktrace.  
+Julia relevance Stacktrace. **Not tested on every system!** 
 
 # Goal
 What are you searching for 99% of the time during development?
