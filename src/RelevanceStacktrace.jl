@@ -99,14 +99,24 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
 							println(io)
 							print_linebreaks && println(io)
 					end
-			end	
-		catch
-			@error "during print_stackframe in RelevanceStacktrace.jl, we can't print the error because the error printing function failed!"
+      end	
+		catch e
+      println(io)
+      @error "during print_stackframe in RelevanceStacktrace.jl, we try to print a the error in the error printing mechanism:"
+      println(io, e)
+      bt = catch_backtrace()
+      filtered = Base.process_backtrace(bt)
+      frames = map(x->first(x)::Base.StackFrame, filtered)
+      for (i, frame) in enumerate(frames)
+        print(io, lpad(" [$i] ", 6))
+        StackTraces.show_spec_linfo(IOContext(io, :backtrace=>true), frame)
+        println(io, " @ $(frame.file):$(frame.line)") 
+      end
 		end
 end
 
 function Base.showerror(io::IO, ex::LoadError, bt; backtrace=true)
-  print(io, "LoadError: ")
+  print(io, "LoadError: ")í
   Base.showerror(io, ex.error, bt, backtrace=backtrace)
   pathparts = splitpath(ex.file)
   folderparts = pathparts[1:end-1]

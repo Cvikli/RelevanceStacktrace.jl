@@ -4,7 +4,7 @@
 # using RelevanceStacktrace
 using Revise
 includet("../src/RelevanceStacktrace.jl")
-
+#%%
 func4(x) = x.+ ["32",3]
 func3(x) = x+5 + func4(x)
 func2(x) = x+3 + func3(x)
