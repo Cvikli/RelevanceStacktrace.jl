@@ -1,9 +1,9 @@
 module RelevanceStacktrace
 
 
-const KNOWN_MODULES = ["VSCodeServer", "Core"]
-const KNOWN_MODULES_PATHS_1 = ["."]
-const KNOWN_MODULES_PATHS_2 = [".vscode", ".julia"]
+KNOWN_MODULES = ["VSCodeServer", "Core", "Distributed"]
+KNOWN_MODULES_PATHS_1 = ["."]
+KNOWN_MODULES_PATHS_2 = [".vscode", ".julia", "buildworker"]
 
 is_project_file(modul, pathparts) = (
 	!(string(modul) in KNOWN_MODULES) && 
@@ -11,10 +11,11 @@ is_project_file(modul, pathparts) = (
 	!(pathparts[2] in KNOWN_MODULES_PATHS_2))
 
 # This is useful because of  
-@info "Overloading Base.print_stackframe(...) with Experimental version (ONLY TESTED FOR Linux)"
 function Base.print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_width, modulecolordict, ownmodulescounter)
 		RelevanceStacktrace.print_stackframe(io, i, frame, n, digit_align_width, ownmodulescounter, false)
 end
+
+@info "Overloading Base.print_stackframe(...) and Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) with Experimental version"
 
 # A different version of print_stackframe
 function print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_width, ownmodulescounter, debug=false)
@@ -84,7 +85,6 @@ function print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_wid
     (debug && print(io, "\nPrinting is ok for 1 file as you see..."))
 end
 
-@info "Overloading Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) with Experimental version (ONLY TESTED FOR Linux)"
 function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
     n = length(trace)
     ndigits_max = ndigits(n)
