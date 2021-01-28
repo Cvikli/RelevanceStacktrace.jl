@@ -31,4 +31,9 @@ using RelevanceStacktrace
 
 But for me it doesn't perform well in certain situation, which I didn't have time to figure out... It only loads the package for the second time in this case...
 
+# Fun fact
+Debug the Debug. :D We catch the error in the error handling and do a very basic error printing mechanism, so we can debug the backtrace printing error. 
+We overloaded the Base.print_stackframe... so basically any stackprinting will be changed with this method. :) 
+
+# Note
 (**only tested on Ubuntu for Julia 1.6!** )
