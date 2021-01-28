@@ -15,7 +15,7 @@ function Base.print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_alig
 		RelevanceStacktrace.print_stackframe(io, i, frame, n, digit_align_width, ownmodulescounter, false)
 end
 
-@info "Overloading Base.print_stackframe(...) and Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) with Experimental version"
+@info "Overloading Base.print_stackframe(...), Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) and Base.showerror(...) with Experimental version"
 
 # A different version of print_stackframe
 function print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_width, ownmodulescounter, debug=false)
@@ -103,6 +103,15 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
 		catch
 			@error "during print_stackframe in RelevanceStacktrace.jl, we can't print the error because the error printing function failed!"
 		end
+end
+
+function Base.showerror(io::IO, ex::LoadError, bt; backtrace=true)
+  print(io, "LoadError: ")
+  Base.showerror(io, ex.error, bt, backtrace=backtrace)
+  pathparts = splitpath(ex.file)
+  folderparts = pathparts[1:end-1]
+  folderpath=(joinpath(folderparts...) * (Sys.iswindows() ? "\\" : "/"))
+  print(io, "\nin expression starting at $(folderpath)\u001b[32;4m$(pathparts[end]):$(ex.line)\033[0m")
 end
 
 end # module
