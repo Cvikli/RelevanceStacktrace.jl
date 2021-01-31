@@ -116,7 +116,7 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
 end
 
 function Base.showerror(io::IO, ex::LoadError, bt; backtrace=true)
-  print(io, "LoadError: ")í
+  print(io, "LoadError: ")
   Base.showerror(io, ex.error, bt, backtrace=backtrace)
   pathparts = splitpath(ex.file)
   folderparts = pathparts[1:end-1]
