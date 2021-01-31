@@ -8,7 +8,7 @@ KNOWN_MODULES_PATHS_2 = [".vscode", ".julia", "buildworker"]
 is_project_file(modul, pathparts) = (
 	!(string(modul) in KNOWN_MODULES) && 
 	!(pathparts[1] in KNOWN_MODULES_PATHS_1) && 
-	!(pathparts[2] in KNOWN_MODULES_PATHS_2))
+	!(length(pathparts)>1 && pathparts[2] in KNOWN_MODULES_PATHS_2))
 
 # This is useful because of  
 function Base.print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_width, modulecolordict, ownmodulescounter)
@@ -102,7 +102,7 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
       end	
 		catch e
       println(io)
-      @error "during print_stackframe in RelevanceStacktrace.jl, we try to print a the error in the error printing mechanism:"
+      @error "Error: during print_stackframe in RelevanceStacktrace.jl, we try to print a the error with a basic format:"
       println(io, e)
       bt = catch_backtrace()
       filtered = Base.process_backtrace(bt)
