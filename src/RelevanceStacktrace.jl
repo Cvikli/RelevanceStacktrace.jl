@@ -21,7 +21,7 @@ end
 function print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_width, ownmodulescounter, debug=false)
     file, line = string(frame.file), frame.line
     Base.stacktrace_expand_basepaths() && (file = something(find_source_file(file), file))
-    Base.stacktrace_contract_userdir() && (file = Base.replaceuserpath(file))
+    Base.stacktrace_contract_userdir() && (file = Base.contractuser(file))
     # Used by the REPL to make it possible to open
     # the location of a stackframe/method in the editor.
     if haskey(io, :last_shown_line_infos)
@@ -86,16 +86,16 @@ function print_stackframe(io, i, frame::Base.StackFrame, n::Int, digit_align_wid
 end
 
 function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
-    n = length(trace)
-    ndigits_max = ndigits(n)
+    num_frames = length(trace)
+    ndigits_max = ndigits(num_frames)
     
     modulecolordict = copy(Base.STACKTRACE_FIXEDCOLORS)
 		ownmodulescounter = IdDict()
 		println(io, "\nStacktrace:")
 		try
-			for (i, frame) in enumerate(trace)
-					Base.print_stackframe(io, i, frame, 1, ndigits_max, modulecolordict, ownmodulescounter)
-					if i < n
+			for (i, (frame, n)) in enumerate(trace)
+					Base.print_stackframe(io, i, frame, n, ndigits_max, modulecolordict, ownmodulescounter)
+					if i < num_frames
 							println(io)
 							print_linebreaks && println(io)
 					end
