@@ -116,12 +116,26 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
 end
 
 function Base.showerror(io::IO, ex::LoadError, bt; backtrace=true)
-  print(io, "LoadError: ")
-  Base.showerror(io, ex.error, bt, backtrace=backtrace)
-  pathparts = splitpath(ex.file)
-  folderparts = pathparts[1:end-1]
-  folderpath=(joinpath(folderparts...) * (Sys.iswindows() ? "\\" : "/"))
-  print(io, "\nin expression starting at $(folderpath)\u001b[32;4m$(pathparts[end]):$(ex.line)\033[0m")
+  try
+    print(io, "LoadError: ")
+    Base.showerror(io, ex.error, bt, backtrace=backtrace)
+    pathparts = splitpath(ex.file)
+    folderparts = pathparts[1:end-1]
+    folderpath=(joinpath(folderparts...) * (Sys.iswindows() ? "\\" : "/"))
+    print(io, "\nin expression starting at $(folderpath)\u001b[32;4m$(pathparts[end]):$(ex.line)\033[0m")
+  catch e
+    println(io)
+    @error "Error: during print_stackframe in RelevanceStacktrace.jl, we try to print a the error with a basic format:"
+    println(io, e)
+    bt = catch_backtrace()
+    filtered = Base.process_backtrace(bt)
+    frames = map(x->first(x)::Base.StackFrame, filtered)
+    for (i, frame) in enumerate(frames)
+      print(io, lpad(" [$i] ", 6))
+      StackTraces.show_spec_linfo(IOContext(io, :backtrace=>true), frame)
+      println(io, " @ $(frame.file):$(frame.line)") 
+    end
+  end
 end
 
 end # module
