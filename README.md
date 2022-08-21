@@ -16,9 +16,11 @@ So let's design it like this! -> RelevanceStacktrace
 
 Stacktrace is for locating the error. Let's FOCUS ONLY on that.
 
-With this package in the past years I literally forgot what does searching for error is as I just click on the ```diff 
-+ **BOLD GREEN**
-``` filename with a ctrl + click in vscode each time.
+With this package in the past years I literally forgot what does searching for error is as I just click on the 
+```diff 
++ BOLD GREEN
+``` 
+filename with a ctrl + click in vscode each time.
   
 Green! Because locating the error is actually good. Not bad! So "We have to locate the right file, so we highlight it!"
 
