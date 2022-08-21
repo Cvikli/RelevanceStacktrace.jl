@@ -24,29 +24,6 @@ I think 99% of the time the error will be in the **the first error of the stackt
 
 Any other time you will always have the unhighlighted parts. :)
 
-# INSTALL
-
-Many way... but easiest:
-
-```julia
-] add https://github.com/Cvikli/RelevanceStacktrace.jl.git
-using RelevanceStacktrace
-```
-
-or
-
-```julia
-include(path_to_file * "RelevanceStacktrace.jl/src/RelevanceStacktrace.jl")
-using .RelevanceStacktrace
-```
-
-or from a folder next to the cloned repo you can try using this version
-
-```julia
-push!(LOAD_PATH, "../RelevanceStacktrace.jl/"); Base.load_path()
-using RelevanceStacktrace
-```
-
 # Demo
 Artificial error, to see it's power:
 ```
@@ -73,6 +50,29 @@ sum([])
 ```
 ![long internal error example](/assets/sum([])_error.png)
 This is still nice I think, but to be honest RelevanceStacktrace shines better when the error is in some of your project file.
+
+# INSTALL
+
+Many way... but easiest:
+
+```julia
+] add https://github.com/Cvikli/RelevanceStacktrace.jl.git
+using RelevanceStacktrace
+```
+
+or
+
+```julia
+include(path_to_file * "RelevanceStacktrace.jl/src/RelevanceStacktrace.jl")
+using .RelevanceStacktrace
+```
+
+or from a folder next to the cloned repo you can try using this version
+
+```julia
+push!(LOAD_PATH, "../RelevanceStacktrace.jl/"); Base.load_path()
+using RelevanceStacktrace
+```
 
 
 # Fun fact
