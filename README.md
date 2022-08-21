@@ -14,21 +14,15 @@ So let's design it like this! -> RelevanceStacktrace
 
 # Why
 
-Stacktrace is for locating the error. Let's FOCUS ONLY on that.
+**Stacktrace is for locating the error. Let's FOCUS ONLY on that.**
 
-With this package in the past years I literally forgot what does searching for error is as I just click on the 
-```diff 
-+ BOLD GREEN
-``` 
-filename with a ctrl + click in vscode each time.
+With this package in the past years I literally forgot what does searching for error is as I just click on the **BOLD GREEN** filename with a ctrl + click in vscode each time.
   
-Green! Because locating the error is actually good. Not bad! So "We have to locate the right file, so we highlight it!"
-
-Finding error has to be a good thing!
+**Green!** Because locating the error is a good thing. Not bad! So "Julia locate the right file and highlight it for us! ;) "
 
 I think 99% of the time the error will be in the **the first error of the stacktrace from your project's files**. >> **So it highlights it! :)**
 
-Any other time you will have the unhighlighted parts. :)
+Any other time you will always have the unhighlighted parts. :)
 
 # INSTALL
 
@@ -89,10 +83,10 @@ This is still nice I think, but to be honest RelevanceStacktrace shines better w
 # Future works?
 **Module names are useless.** Actually we could drop the modul names as it just waste of space
 **Function param types are pretty useless.** Maybe we could just show function names and parameters::types if it is actually matters... (As it is used very very rarely!) 
-**AbbreviatedStackTraces sounds interesting** We could merge it into this project with an optional flag maybe? 
+**AbbreviatedStackTraces sounds interesting** We could merge it into this project with an optional flag maybe later on? 
 
 # Great stacktraces
-- AbbreviatedStackTraces: great project. :) https://github.com/BioTurboNick/AbbreviatedStackTraces.jl
+- AbbreviatedStackTraces: great project. :) https://github.com/BioTurboNick/AbbreviatedStackTraces.jl As UX decision I didn't merged it as the variation of stacktrace can create interruption in the thinking. We expect the output to be always the same. But of course more test should be done if someone believe it can be useful. 
 - ClearStacktrace: was great for inspiration! https://github.com/jkrumbiegel/ClearStacktrace.jl
 
 # Note
