@@ -1,29 +1,26 @@
 # RelevanceStacktrace.jl
+Find the error as fast as possible! 
 
 Most important elements in the stacktrace:
-1. source file of the error
-	1. you can change with location of the file + filename + line number
+1. error **source file that you edit**
+	1. **file + filename + line number**
 	2. function name
 	3. stack depth counter
 	4. modul name
 2. other project files
 3. other internal files
+
 So let's design it like this! -> RelevanceStacktrace
-
-
 
 # Why
 
 Stacktrace is for locating the error. Let's FOCUS ONLY on that.
 
-With this package in the past years I literally forgot what does searching for error is as I just click on the <span  style="color:green; text-decoration: underline">**BOLD GREEN**</span> filename with a ctrl + click in vscode each time.
+With this package in the past years I literally forgot what does searching for error is as I just click on the ```diff + **BOLD GREEN**``` filename with a ctrl + click in vscode each time.
   
 Green! Because locating the error is actually good. Not bad! So "We have to locate the right file, so we highlight it!"
 
 Finding error has to be a good thing!
-
-# Goal
-Keep it short and fast to find the file for the error! 
 
 I think 99% of the time the error will be in the **the first error of the stacktrace from your project's files**. >> **So it highlights it! :)**
 
