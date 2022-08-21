@@ -1,10 +1,10 @@
 module RelevanceStacktrace
 import Base: find_source_file, show_full_backtrace, StackFrame, fixup_stdlib_path,
-stacktrace_expand_basepaths, stacktrace_contract_userdir, contractuser
+stacktrace_expand_basepaths, stacktrace_contract_userdir, contractuser, something
 
-KNOWN_MODULES = ["VSCodeServer", "Core", "Distributed"]
-KNOWN_MODULES_PATHS_1 = ["."]
-KNOWN_MODULES_PATHS_2 = [".vscode", ".julia", "buildworker"]
+const KNOWN_MODULES = ["VSCodeServer", "Core", "Distributed"]
+const KNOWN_MODULES_PATHS_1 = ["."]
+const KNOWN_MODULES_PATHS_2 = [".vscode", ".julia", "buildworker"]
 
 is_project_file(modul, pathparts) = (
 	!(string(modul) in KNOWN_MODULES) && 
@@ -82,7 +82,8 @@ function print_stackframe_relevance_print(io, i, frame::Base.StackFrame, n::Int,
 end
 
 
-function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
+Base.show_full_backtrace(io::IO, trace; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
+function show_full_backtrace_relevance(io::IO, trace, print_linebreaks::Bool)
   num_frames = length(trace)
   ndigits_max = ndigits(num_frames)
   
@@ -92,12 +93,16 @@ function Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool)
   println(io, "\nStacktrace:")
 
   try
-    for (i, (frame, n)) in enumerate(trace)
+    trace_fix = convert(Vector{Tuple{StackFrame, Int}}, trace)
+    i=1
+    while length(trace_fix) >= i
+      frame, n = trace_fix[i]
       print_stackframe_relevance(io, i, frame, n, ndigits_max, modulecolordict, ownmodulescounter)
       if i < num_frames
           println(io)
           print_linebreaks && println(io)
       end
+      i+=1
     end
   catch e
     println(io)
