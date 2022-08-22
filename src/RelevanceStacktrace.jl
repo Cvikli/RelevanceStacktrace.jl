@@ -82,7 +82,7 @@ function print_stackframe_relevance_print(io, i, frame::Base.StackFrame, n::Int,
 end
 
 
-Base.show_full_backtrace(io::IO, trace; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
+Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
 function show_full_backtrace_relevance(io::IO, trace, print_linebreaks::Bool)
   num_frames = length(trace)
   ndigits_max = ndigits(num_frames)
