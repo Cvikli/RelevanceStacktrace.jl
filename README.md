@@ -42,7 +42,7 @@ end
 func1(3)
 ```
 ![artificial error example](/assets/artificial_error.png)
-In real life example if will be even more useful.
+In real life example it is even more useful.
 
 Long stacktrace error:
 ```
