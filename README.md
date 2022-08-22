@@ -73,7 +73,11 @@ or from a folder next to the cloned repo you can try using this version
 push!(LOAD_PATH, "../RelevanceStacktrace.jl/"); Base.load_path()
 using RelevanceStacktrace
 ```
-
+or 
+```
+using Pkg; Pkg.add(url="https://github.com/Cvikli/RelevanceStacktrace.jl.git")
+using RelevanceStacktrace
+```
 
 # Fun fact
 
