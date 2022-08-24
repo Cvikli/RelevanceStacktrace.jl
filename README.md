@@ -1,4 +1,4 @@
-# RelevanceStacktrace.jl (a MUST HAVE PACKAGE ;) )
+# RelevanceStacktrace.jl
 **Find the error as fast as possible!**
 
 Most important elements in the stacktrace:
