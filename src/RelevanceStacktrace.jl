@@ -3,13 +3,13 @@ import Base: find_source_file, show_full_backtrace, StackFrame, fixup_stdlib_pat
 stacktrace_expand_basepaths, stacktrace_contract_userdir, contractuser, something
 
 const KNOWN_MODULES = ["VSCodeServer", "Core", "Distributed"]
-const KNOWN_MODULES_PATHS_1 = ["."]
-const KNOWN_MODULES_PATHS_2 = [".vscode", ".julia", "buildworker"]
+const KNOWN_MODULES_PATHS_BASE = ["."]
+const KNOWN_MODULES_PATHS = [".vscode", ".julia", "buildworker"]
 
 is_project_file(modul, pathparts) = (
 	!(string(modul) in KNOWN_MODULES) && 
-	!(pathparts[1] in KNOWN_MODULES_PATHS_1) && 
-	!(length(pathparts)>1 && pathparts[2] in KNOWN_MODULES_PATHS_2))
+	!(pathparts[1] in KNOWN_MODULES_PATHS_BASE) && 
+	!any(pathpart in KNOWN_MODULES_PATHS for pathpart in pathparts))  
 
 # This is useful because of  
 function print_stackframe_relevance(io, i, frame::Base.StackFrame, n::Int, digit_align_width, modulecolordict, ownmodulescounter)
