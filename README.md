@@ -100,6 +100,6 @@ using RelevanceStacktrace
 
 # Note
 
-(**only tested on Ubuntu for Julia 1.8!** )
+(**only tested on Linux (Ubuntu) for Julia 1.8!** )
 
-(**later version was tested on Ubuntu for Julia 1.6 and 1.7!** )
+(**earlier version was tested on Linux (Ubuntu) for Julia 1.6 and 1.7!** )
