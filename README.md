@@ -53,29 +53,13 @@ This is still nice I think, but to be honest RelevanceStacktrace shines better w
 
 # INSTALL
 
-Many way... but easiest:
-
 ```julia
-] add https://github.com/Cvikli/RelevanceStacktrace.jl.git
-using RelevanceStacktrace
-```
-
-or
-
-```julia
-include(path_to_file * "RelevanceStacktrace.jl/src/RelevanceStacktrace.jl")
-using .RelevanceStacktrace
-```
-
-or from a folder next to the cloned repo you can try using this version
-
-```julia
-push!(LOAD_PATH, "../RelevanceStacktrace.jl/"); Base.load_path()
+] add RelevanceStacktrace
 using RelevanceStacktrace
 ```
 or 
 ```
-using Pkg; Pkg.add(url="https://github.com/Cvikli/RelevanceStacktrace.jl.git")
+using Pkg; Pkg.add("RelevanceStacktrace")
 using RelevanceStacktrace
 ```
 
@@ -103,3 +87,5 @@ using RelevanceStacktrace
 (**only tested on Linux (Ubuntu) for Julia 1.8!** )
 
 (**earlier version was tested on Linux (Ubuntu) for Julia 1.6 and 1.7!** )
+
+(**It doesn't work in notebooks as it use different coloring. USE VSCODE!** )

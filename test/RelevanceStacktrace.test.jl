@@ -4,6 +4,7 @@
 # using RelevanceStacktrace
 using Revise
 includet("../src/RelevanceStacktrace.jl")
+using .RelevanceStacktrace
 
 
 func4(x) = begin
