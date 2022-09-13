@@ -84,12 +84,19 @@ end
 
 Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
 function show_full_backtrace_relevance(io::IO, trace, print_linebreaks::Bool)
+  global is_next_stacktrace_disabled
   num_frames = length(trace)
   ndigits_max = ndigits(num_frames)
   
   modulecolordict = copy(Base.STACKTRACE_FIXEDCOLORS)
   ownmodulescounter = IdDict()
   
+  if is_next_stacktrace_disabled
+    is_next_stacktrace_disabled = false
+    println(io, "\nStacktrace was disabled.")
+    return
+  end
+
   println(io, "\nStacktrace:")
 
   try
@@ -118,6 +125,22 @@ function show_full_backtrace_relevance(io::IO, trace, print_linebreaks::Bool)
     end
   end
 end
-
+assert_no_stacktrace(ex_val, msgs...) = begin
+  disable_next_stacktrace_print()
+  @assert ex_val msgs...
+  enable_next_stacktrace_print()
+end
+macro assert_no_stacktrace(ex, msgs...)
+  return :(assert_no_stacktrace($(esc(ex)), $msgs))
+end
+is_next_stacktrace_disabled = false
+disable_next_stacktrace_print() = begin
+  global is_next_stacktrace_disabled
+  is_next_stacktrace_disabled = true
+end
+enable_next_stacktrace_print() = begin
+  global is_next_stacktrace_disabled
+  is_next_stacktrace_disabled = false
+end
 
 end # module

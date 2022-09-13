@@ -80,3 +80,10 @@ func4(x) = x.+ @assert false
 
 func1(3)
 
+#%%
+using Revise
+using RelevanceStacktrace: @assert_no_stacktrace
+using RelevanceStacktrace: assert_no_stacktrace
+@show "OK"
+assert_no_stacktrace(true,)
+@assert_no_stacktrace false "OKAY"
