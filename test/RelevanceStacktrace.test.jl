@@ -82,8 +82,7 @@ func1(3)
 
 #%%
 using Revise
-using RelevanceStacktrace: @assert_no_stacktrace
-using RelevanceStacktrace: assert_no_stacktrace
+using RelevanceStacktrace
 @show "OK"
 assert_no_stacktrace(true,)
 @assert_no_stacktrace false "OKAY"

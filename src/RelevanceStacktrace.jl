@@ -130,6 +130,7 @@ assert_no_stacktrace(ex_val, msgs...) = begin
   @assert ex_val msgs...
   enable_next_stacktrace_print()
 end
+export @assert_no_stacktrace, assert_no_stacktrace
 macro assert_no_stacktrace(ex, msgs...)
   return :(assert_no_stacktrace($(esc(ex)), $msgs))
 end
