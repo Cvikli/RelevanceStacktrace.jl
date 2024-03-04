@@ -1,6 +1,10 @@
 module RelevanceStacktrace
-import Base: find_source_file, show_full_backtrace, StackFrame, fixup_stdlib_path,
+
+__precompile__(false)
+
+import Base: find_source_file, StackFrame, fixup_stdlib_path,
 stacktrace_expand_basepaths, stacktrace_contract_userdir, contractuser, something
+using Base
 
 const KNOWN_MODULES = ["VSCodeServer", "Core", "Distributed"]
 const KNOWN_MODULES_PATHS_BASE = ["."]
@@ -16,7 +20,6 @@ function print_stackframe_relevance(io, i, frame::Base.StackFrame, n::Int, digit
   print_stackframe_relevance_print(io, i, frame, n, digit_align_width, modulecolordict, ownmodulescounter)
 end
 
-@info "Overloading Base.print_stackframe(...), Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) and Base.showerror(...) with Experimental version"
 
 # Print a stack frame where the module color is set manually with `modulecolor`.
 function print_stackframe_relevance_print(io, i, frame::Base.StackFrame, n::Int, digit_align_width, modulecolor, ownmodulescounter)
@@ -82,7 +85,7 @@ function print_stackframe_relevance_print(io, i, frame::Base.StackFrame, n::Int,
 end
 
 
-Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
+
 function show_full_backtrace_relevance(io::IO, trace, print_linebreaks::Bool)
   global is_next_stacktrace_disabled
   num_frames = length(trace)
@@ -143,5 +146,14 @@ enable_next_stacktrace_print() = begin
   global is_next_stacktrace_disabled
   is_next_stacktrace_disabled = false
 end
+
+
+
+Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
+__init__() = begin
+  @info "Overloading Base.print_stackframe(...), Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) and Base.showerror(...) with Experimental version"
+end
+
+
 
 end # module
