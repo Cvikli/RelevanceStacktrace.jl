@@ -16,7 +16,7 @@ So let's design it like this! -> RelevanceStacktrace
 
 **Stacktrace is for locating the error. Let's FOCUS ONLY on that.**
 
-With this package in the past years I literally forgot what does searching for error is as I just click on the **BOLD GREEN** filename with a ctrl + click in vscode each time.
+With this package in the past years I literally forgot what does searching for error means. As I never do/not necessary, I just click on the **BOLD GREEN** filename with a ctrl + click in vscode each time.
   
 **Green!** Because locating the error is a good thing. Not bad! So "Julia locate the right file and highlight it for us! ;) "
 
