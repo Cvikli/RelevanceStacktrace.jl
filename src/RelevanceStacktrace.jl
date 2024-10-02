@@ -151,7 +151,7 @@ end
 
 Base.show_full_backtrace(io::IO, trace::Vector; print_linebreaks::Bool) = show_full_backtrace_relevance(io, trace, print_linebreaks)
 __init__() = begin
-  @info "Overloading Base.print_stackframe(...), Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) and Base.showerror(...) with Experimental version"
+  # @info "Overloading Base.print_stackframe(...), Base.show_full_backtrace(io::IO, trace::Vector, print_linebreaks::Bool) and Base.showerror(...) with Experimental version"
 end
 
 

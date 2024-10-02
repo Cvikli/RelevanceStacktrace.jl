@@ -82,6 +82,11 @@ using RelevanceStacktrace
 - AbbreviatedStackTraces: great project. :) https://github.com/BioTurboNick/AbbreviatedStackTraces.jl As UX decision I didn't merged it as the variation of stacktrace can create interruption in the thinking. We expect the output to be always the same. But of course more test should be done if someone believe it can be useful. 
 - ClearStacktrace: was great for inspiration! https://github.com/jkrumbiegel/ClearStacktrace.jl
 
+# TODO
+- mix with AbbreviatedStackTraces.jl
+- configurable stacktrace
+- when there are import problems: in expression starting at /home/.../repo/Import...jl:8 it should be bolded too, as it is the same
+
 # Note
 
 (**only tested on Linux (Ubuntu) for Julia 1.8!** )
